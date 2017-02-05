@@ -29,7 +29,7 @@ def teardown(exception=None):
 @app.errorhandler(500)
 def internal_error(exception):
     app.logger.exception(exception)
-    return render_template('500.html', 500)
+    return render_template('500.html'), 500
 
 @app.route('/')
 def hello_world():
@@ -64,9 +64,9 @@ def search():
         }
       ],
     order by ranges[0].start?
-    '''    
+    '''
     view = g.db.view("main/by_textId")
-    
+
     matches = view[textId]
 
     ret = {
@@ -120,7 +120,7 @@ def edit_annotation(id):
 
     # Which database to save to?
     db_name = doc["db"]
-    
+
     g.db = couch[db_name]
 
     # Remove this so it isn't saved as part of the annotation
@@ -143,7 +143,7 @@ def delete_annotation(id):
 
     # Which database to save to?
     db_name = doc["db"]
-    
+
     g.db = couch[db_name]
 
     doc = g.db.get(id)
