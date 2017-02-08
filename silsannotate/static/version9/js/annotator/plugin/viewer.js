@@ -1149,7 +1149,7 @@ Annotator.Plugin.Viewer = (function(_super) {
         var radio = $(e.target);
         //create array of annotations that have empty text
         var emptyTextAnnotations = this.annotations.filter(function(annotation){
-            return (annotation.text.length < 1);
+            return (annotation.text.length <= 1);
         });
 
         var elements = "";
@@ -1186,8 +1186,21 @@ Annotator.Plugin.Viewer = (function(_super) {
 
         if(radio.val() == "hide"){
             annotationPanel.addClass("hidden");
+            $(".plus-toggle[clicked ='1']").trigger("click");
+            $(".plus-toggle").attr('clicked', "0");
+            $(document).unbind({
+                "mouseup": this.annotator.checkForEndSelection,
+                "mousedown": this.annotator.checkForStartSelection
+            });
+            $(document).off("click", "article .annotator-hl", this.bringAnnotationIntoView);
+
         } else {
             annotationPanel.removeClass("hidden");
+            $(document).bind({
+                "mouseup": this.annotator.checkForEndSelection,
+                "mousedown": this.annotator.checkForStartSelection
+            });
+            $(document).on("click", "article .annotator-hl", this.bringAnnotationIntoView);
         }
     }
 

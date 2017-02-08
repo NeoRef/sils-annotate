@@ -468,7 +468,7 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.onHighlightMouseover = function(event) {
-      
+
     var annotations;
     this.clearViewerHideTimer();
     if (this.mouseIsDown) {
