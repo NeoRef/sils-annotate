@@ -423,13 +423,15 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.checkForStartSelection = function(event) {
-    if (!(event && this.isAnnotator(event.target))) {
+
+      if (!(event && this.isAnnotator(event.target))) {
       this.startViewerHideTimer();
     }
     return this.mouseIsDown = true;
   };
 
   Annotator.prototype.checkForEndSelection = function(event) {
+
     var container, range, _i, _len, _ref;
     this.mouseIsDown = false;
     if (this.ignoreMouseup) {
@@ -466,6 +468,7 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.onHighlightMouseover = function(event) {
+      
     var annotations;
     this.clearViewerHideTimer();
     if (this.mouseIsDown) {
@@ -517,22 +520,66 @@ Annotator = (function(_super) {
     var inlineOffset = $(annotation.highlights[0]).inlineOffset();
     
     // display q-tip when user annotates
-      var parent = $(annotation.highlights[0]).parents('span').parent().length;
-      if (parent) {
-        var toggleDiv = $(annotation.highlights[0]).parents('span').parent().attr('class').split(' ')[0];
-        // display the info for debugging purpose Zhenwei
-        // console.log(toggleDiv);
-        // console.log($('.' + toggleDiv).find('.annotator-hl').length);
-        if ($('.' + toggleDiv).find('.annotator-hl').length) {
-          if (!$('.' + toggleDiv).find('.plus-toggle').data("clicked")) {
-            $('.' + toggleDiv).find('.plus-toggle').trigger("click");
-            $('.' + toggleDiv).find('.plus-toggle').attr('clicked', "1");}
-        }
-    }
-    if (!parent) {
-      $('div.qtip:visible').qtip('hide');
-    }
 
+        // use util to find the parent className, and use the name to toggle corresponding qtip object.
+
+        var toggleDiv=undefined;
+
+        // the try catch here differentiate the selection difference: select pre-selected area/ select un-selected area
+        try {
+            toggleDiv = $(annotation.highlights[0]).parents('span').parent().attr('class').split(' ')[0];
+            // console.log("selected area: " + toggleDiv);
+        }
+        catch (TypeError) {
+            toggleDiv = $(Util.getGlobal().getSelection().anchorNode)[0].className;
+            // console.log("un-selected area: " + toggleDiv);
+        }
+
+        // if ($('.' + toggleDiv).find('.annotator-hl').length) {
+        //     console.log($('.' + toggleDiv).find('.plus-toggle').attr('clicked'));
+        //   if ($('.' + toggleDiv).find('.plus-toggle').attr('clicked')==0){
+
+        // a quick testing showed that when annotator-hl count as 1, the paragraph is empty, need more investigation.
+        // if annotate before
+        if ($('.' + toggleDiv).find('.annotator-hl').length!=1) {
+            console.log($('.' + toggleDiv).find('.plus-toggle').attr('clicked'));
+
+            // if clicked
+            if ($('.' + toggleDiv).find('.plus-toggle').attr('clicked') == 1) {
+                // $('.' + toggleDiv).find('.plus-toggle').trigger("click");
+                // $('div.qtip:visible').qtip('hide');
+                // $('.plus-toggle').each(function () {
+                //     $(this).attr('clicked', '0');
+                // });
+                // $(".plus-toggle[clicked ='1']").attr('clicked', "0");
+
+            }
+            // if not clicked.
+            else if ($('.' + toggleDiv).find('.plus-toggle').attr('clicked') == 0) {
+                $('.' + toggleDiv).find('.plus-toggle').attr('clicked', "1");
+                $('.' + toggleDiv).find('.plus-toggle').trigger("click");
+                $('div.qtip:visible').qtip('show');
+
+            }
+            else {
+                console.log($('.' + toggleDiv).find('.plus-toggle'));
+                // $('div.qtip:visible').qtip('hide');
+                $(".plus-toggle[clicked ='1']").attr('clicked', "0");
+            }
+
+        }
+       else if ($('.' + toggleDiv).find('.annotator-hl').length==1) {
+          console.log($('.' + toggleDiv).find('.plus-toggle').attr('clicked'));
+          if ($('.' + toggleDiv).find('.plus-toggle').attr('clicked')==0) {
+              $('.' + toggleDiv).find('.plus-toggle').trigger("click");
+          }
+            $(".plus-toggle[clicked ='1']").attr('clicked', "0");
+            $('.' + toggleDiv).find('.plus-toggle').attr('clicked', "1");
+        }
+
+
+        //   }
+        // }
 
 
     //http://stackoverflow.com/a/11854456/360509
