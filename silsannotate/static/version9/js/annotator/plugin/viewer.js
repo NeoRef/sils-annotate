@@ -61,6 +61,34 @@ Annotator.Plugin.Viewer = (function(_super) {
                             </div>\
                         </div>\
                     </div>';
+						//Hamburger without first item in the list.
+	var infoPanel2 = '<div class="annotation-info" style="z-index:16000" >\
+                        <div class="panel-section clearfix">\
+                            <div class="panel-title">Show empty annotations</div>\
+                            <div class="panel-details hide-empty-annotations">\
+                                <label><input type="radio" name="show_empty_annotations" value="show" checked="checked" /> Show</label><br />\
+                                <label><input type="radio" name="show_empty_annotations" value="hide" /> Hide</label>\
+                            </div>\
+                        </div>\
+                        <hr />\
+                        <div class="panel-section clearfix">\
+                            <div class="panel-title">Show annotation panel</div>\
+                            <div class="panel-details hide-annotation-panel">\
+                                <label><input type="radio" name="show_annotation_panel" value="show" checked="checked" /> Show</label><br />\
+                                <label><input type="radio" name="show_annotation_panel" value="hide" /> Hide</label>\
+                            </div>\
+                        </div>\
+                        <hr />\
+                        <div class="panel-section clearfix">\
+                            <div class="panel-title">About this article</div>\
+                            <div class="panel-details">\
+                                <div class="info-item">Your annotations: <span id="current-user-annotations-count"></span></div>\
+                                <div class="info-item">All annotations: <span id="all-annotations-count"></span></div>\
+                                <div class="info-item">Number of users: <span id="number-of-annotators"></span></div>\
+                            </div>\
+                        </div>\
+                    </div>';
+    
     //the menu bar at the top of the screen that holds all the interface icons
     var menuBar =   '<div class="annotation-menubar">\
                         <div class="menu-container">\
@@ -150,7 +178,16 @@ Annotator.Plugin.Viewer = (function(_super) {
         //add the UI elements to the page
         $("#container").append(annotationPanel);
         $(document.body).append(menuBar);
-        $(document.body).append(infoPanel);
+		
+		//add hamburger based on the input request of (ham or no ham)
+		if (window.location.href.match(/nhm/))
+		{
+		 $(document.body).append(infoPanel2);
+		}else
+		{
+		$(document.body).append(infoPanel);
+		}
+        
 
         //get the height of the menu bar; helps with adjusting vertical placement of other items
         menuBarHeight = $(".annotation-menubar").height();
@@ -1149,7 +1186,7 @@ Annotator.Plugin.Viewer = (function(_super) {
         var radio = $(e.target);
         //create array of annotations that have empty text
         var emptyTextAnnotations = this.annotations.filter(function(annotation){
-            return (annotation.text.length <= 1);
+            return (annotation.text.length < 1);
         });
 
         var elements = "";
