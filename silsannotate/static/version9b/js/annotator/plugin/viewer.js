@@ -588,7 +588,7 @@ Annotator.Plugin.Viewer = (function(_super) {
                 var textTop = $this.position().top + parseInt($this.css("margin-top")) + parseInt($this.css("padding-top")) - 10;
 
                 annotationPanes += '<div style="margin-left:-8%;margin-top:0px;width:30px;position:absolute;top: '+textTop+'px;" class="hasTooltip annotation-pane ' + textDivisionClass +
-                '"><a href="#plus-toggle"  class="plus-toggle" clicked="0" title="Click to display annotations"><img src="/static/version9b/img/article-icon.png" alt="Select" style="width:36px; "></a></div><div style="height:88vh;overflow-y:auto;display:none;">'
+                '"><a href="#plus-toggle"  class="plus-toggle" clicked="0" title="Click to display annotations"><img src="/static/version9b/img/article-icon.png" alt="Select" style=style=style="width:27px; height:33px;"></a></div><div style="height:88vh;overflow-y:auto;display:none;">'
                                         + contents +
                                     '</div>';
             // version9b// }
@@ -625,7 +625,7 @@ Annotator.Plugin.Viewer = (function(_super) {
                         //);
                             ,function(){
                                  {
-                                    $(".plus-toggle").html('<img src="/static/version9b/img/article-icon.png" "" alt="Select" style="width:36px;">');
+                                    $(".plus-toggle").html('<img src="/static/version9b/img/article-icon.png" "" alt="Select" style="width:26px; height:33px;">');
                                      // $(".plus-toggle").data('clicked', false);
                                      $(".plus-toggle").attr('clicked', "0");
                                      $(".plus-toggle").animate({opacity:1});
@@ -663,7 +663,7 @@ Annotator.Plugin.Viewer = (function(_super) {
             $(this).html('<img src="/static/version9b/img/article-selected-icon.png" alt="Select" style="width:36px">').animate({opacity:1});
             //$(".plus-toggle").not($(this)).fadeOut("fast");
             //$(".plus-toggle").not($(this)).fadeIn("fast").html('<img src="/static/version9b/img/article-unselected-icon.png" alt="Select" style="width:20px; height:26px;">');
-            $(".plus-toggle").not($(this)).html('<img src="/static/version9b/img/article-unselected-icon.png" alt="Select" style="width:34px">').animate({opacity:0.4},'slow');
+            $(".plus-toggle").not($(this)).html('<img src="/static/version9b/img/article-unselected-icon.png" alt="Select" style="width:20px; height:26px;">').animate({opacity:0.4},'slow');
             //add a checker to avoid multiple click event in annotator/annotator.js line 529
             $(this).data('clicked', true);
             $(".plus-toggle").not($(this)).data('clicked', false);
