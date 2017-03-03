@@ -660,7 +660,7 @@ Annotator.Plugin.Viewer = (function(_super) {
             //$(".plus-toggle").html('<img src="/static/version8/img/article-icon.png" alt="Select" style="width:26px; height:33px;">');
             //$(".hasTooltip").not($(this)).html('<img src="/static/version8/img/minus-icon.png" alt="Select" style="width:26px; height:33px;">');
             //$(this).fadeOut(100);
-            $(this).html('<img src="/static/version9b/img/article-selected-icon.png" alt="Select" style="width:36px">').animate({opacity:1});
+            $(this).html('<img src="/static/version9b/img/article-selected-icon.png" alt="Select" style="width:26px; height:33px;">').animate({opacity:1});
             //$(".plus-toggle").not($(this)).fadeOut("fast");
             //$(".plus-toggle").not($(this)).fadeIn("fast").html('<img src="/static/version9b/img/article-unselected-icon.png" alt="Select" style="width:20px; height:26px;">');
             $(".plus-toggle").not($(this)).html('<img src="/static/version9b/img/article-unselected-icon.png" alt="Select" style="width:20px; height:26px;">').animate({opacity:0.4},'slow');
