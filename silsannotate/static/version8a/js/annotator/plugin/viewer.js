@@ -1050,7 +1050,7 @@ Annotator.Plugin.Viewer = (function(_super) {
         editor.focus();
 
         $(document).on("click.saveEditedAnnotation", function(e){
-            //":not(.annotation textarea)" selector didn't work, so manually check the click wasn't inside the text area
+            //":not(.annotation textarea)" selector didn't work, so manually check the click wasn't inside the text area//
             if(e.target === editor[0]){
                 return false;
             } else {
