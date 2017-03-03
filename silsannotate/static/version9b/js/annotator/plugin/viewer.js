@@ -588,7 +588,7 @@ Annotator.Plugin.Viewer = (function(_super) {
                 var textTop = $this.position().top + parseInt($this.css("margin-top")) + parseInt($this.css("padding-top")) - 10;
 
                 annotationPanes += '<div style="margin-left:-8%;margin-top:0px;width:30px;position:absolute;top: '+textTop+'px;" class="hasTooltip annotation-pane ' + textDivisionClass +
-                '"><a href="#plus-toggle"  class="plus-toggle" clicked="0" title="Click to display annotations"><img src="/static/version9b/img/article-icon.png" alt="Select" style=style=style="width:27px; height:33px;"></a></div><div style="height:88vh;overflow-y:auto;display:none;">'
+                '"><a href="#plus-toggle"  class="plus-toggle" clicked="0" title="Click to display annotations"><img src="/static/version9b/img/article-icon.png" alt="Select" style="width:27px; height:33px;"></a></div><div style="height:88vh;overflow-y:auto;display:none;">'
                                         + contents +
                                     '</div>';
             // version9b// }
