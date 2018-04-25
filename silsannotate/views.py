@@ -5,7 +5,7 @@ from flask import render_template, request, make_response, g, abort
 from jinja2 import TemplateNotFound
 from silsannotate import app
 
-couch = couchdb.Server(url=os.getenv("SILS_CLOUDANT_URL"))
+couch = couchdb.Server(url='https://6c080b03-08b2-4e8c-a7b6-f9983c1ed62f-bluemix:74e2a69e2e2b27b938b0b7d7b31b7dade8d577418229f2d3cf55f51954de5f0c@6c080b03-08b2-4e8c-a7b6-f9983c1ed62f-bluemix.cloudant.com/')
 
 @app.before_request
 def set_db():
